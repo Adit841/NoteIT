@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notely</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    
+    <div class="container">
+      <header>
+        <nav class="navbar">
+          <input type="text" placeholder="Search......" class="search" />
+          <button class="addbtn">+ADD</button>
+        </nav>
+      </header>
+      <section class="filter">
+        <div class="tab">
+          <span class="active">All</span>
+          <span>Personal</span>
+          <span>Home</span>
+          <span>Business</span>
+        </div>
+        <label
+          ><input type="checkbox" />
+          Show only completed notes
+        </label>
+      </section>
+      <main class="notes">
+        <div class="note_card">
+          <div class="top">
+            <span class="badge">Buisness</span>
+            <div class="actions">
+              <input type="checkbox">
+              <span class="icon">✏️</span>
+               <span class="icon">🗑️</span>
+            </div>
+          </div>
+            <h3>Finish the task on the board</h3>
+            <p>Remeber to finish task...</p>
+            <div class="date">22.01.2023</div>
+        </div>
+        </div>
+      </main>
+    </div>
+    <div class="modal hidden">
+      <div class=".madal-content">
+        <h2>ADD NOTE</h2>
+        <input type="text" id="title" placeholder="Title">
+        <textarea  id="desc" placeholder="Description"></textarea>
+
+        <select id="category">
+          <option value="buisness">Buisness</option>
+          <option value="home">Home</option>
+          <option value="personal">Personal</option>
+        </select>
+        <button id="saveeNote">Save Note</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
