@@ -15,10 +15,10 @@ saveBtn.addEventListener("click", () => {
   const date = new Date().toLocaleDateString();
 
   const note = document.createElement("div");
-  note.classList.add("note-card");
+  note.classList.add("note_card");
 
   note.innerHTML = `
-    <div class="card-top">
+    <div class="top">
       <span class="badge ${category}">
         ${category}
       </span>
@@ -26,7 +26,7 @@ saveBtn.addEventListener("click", () => {
       <div class="actions">
         <input type="checkbox">
         <span class="icon">✏️</span>
-        <span class="delete-btn">🗑️</span>
+        <span class="delete_btn">🗑️</span>
       </div>
     </div>
 
@@ -38,8 +38,8 @@ saveBtn.addEventListener("click", () => {
 
   notesContainer.appendChild(note);
 
-  // DELETE
-  const deleteBtn = note.querySelector(".delete-btn");
+
+  const deleteBtn = note.querySelector(".delete_btn");
 
   deleteBtn.addEventListener("click", () => {
     note.remove();

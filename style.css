@@ -165,3 +165,9 @@ body {
   opacity: 0.6;
   text-decoration: line-through;
 }
+.delete_btn{
+  cursor: pointer;
+}
+.icon{
+  cursor: pointer;
+}
