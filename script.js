@@ -2,6 +2,10 @@ const addBtn = document.querySelector(".addbtn");
 const modal = document.querySelector(".modal");
 const saveBtn = document.querySelector("#saveNote");
 const notesContainer = document.querySelector(".notes");
+const searchInput = document.querySelector("#searchInput");
+const tabs = document.querySelectorAll(".tab span");
+
+let selectedCategory = "all";
 
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
@@ -14,7 +18,7 @@ function saveTolocalStorage() {
 
 function renderNote(noteData) {
   const note = document.createElement("div");
-  note.classList.add("note-card");
+  note.classList.add("note_card");
 
   note.innerHTML = `
     <div class="top">
@@ -55,6 +59,12 @@ function renderNote(noteData) {
   if (noteData.completed) {
     note.classList.add("completed");
   }
+};
+
+function renderFilteredNotes() {
+  notesContainer.innerHTML = "";
+
+  let filteredNotes = notes;
 }
 saveBtn.addEventListener("click", () => {
   const title = document.getElementById("title").value;

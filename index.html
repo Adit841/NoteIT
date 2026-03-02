@@ -11,16 +11,16 @@
     <div class="container">
       <header>
         <nav class="navbar">
-          <input type="text" placeholder="Search......" class="search" />
+          <input type="text" placeholder="Search......" class="search" id="searchInput"/>
           <button class="addbtn">+ADD</button>
         </nav>
       </header>
       <section class="filter">
         <div class="tab">
           <span class="active">All</span>
-          <span>Personal</span>
-          <span>Home</span>
-          <span>Business</span>
+          <span data-category="personal">Personal</span>
+          <span data-category="home">Home</span>
+          <span data-category="business">Business</span>
         </div>
         <label
           ><input type="checkbox" />
