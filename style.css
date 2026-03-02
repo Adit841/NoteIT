@@ -148,7 +148,7 @@ body {
   flex-direction: column;
   gap: 12px;
 }
-.modal-content inpiut,.modal-content textarea,.modal-content select{
+.modal-content input,.modal-content textarea,.modal-content select{
   padding: 8px;
   border-radius: 6px;
   border: 1px solid #ddd;
@@ -160,4 +160,8 @@ body {
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
+}
+.completed{
+  opacity: 0.6;
+  text-decoration: line-through;
 }
