@@ -30,7 +30,7 @@
       <main class="notes">
         <div class="note_card">
           <div class="top">
-            <span class="badge">Buisness</span>
+            <span class="badge">Business</span>
             <div class="actions">
               <input type="checkbox">
               <span class="icon1">✏️</span>
@@ -45,13 +45,17 @@
       </main>
     </div>
     <div class="modal hidden">
+
       <div class="modal-content">
-        <h2>ADD NOTE</h2>
+        <div class="modal-header">
+          <h2>ADD NOTE</h2>
+          <button id="exit">X</button>
+        </div>
         <input type="text" id="title" placeholder="Title">
         <textarea  id="desc" placeholder="Description"></textarea>
-
+        
         <select id="category">
-          <option value="buisness">Buisness</option>
+          <option value="business">Business</option>
           <option value="home">Home</option>
           <option value="personal">Personal</option>
         </select>

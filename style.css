@@ -107,7 +107,7 @@ body {
   font-weight: 500;
   color: white;
 }
-.buisness{
+.business{
   background:#b084f5;
 }
 
@@ -148,12 +148,22 @@ body {
   flex-direction: column;
   gap: 12px;
 }
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.modal-header h2 {
+  margin: 0;
+  flex: 1;
+}
 .modal-content input,.modal-content textarea,.modal-content select{
   padding: 8px;
   border-radius: 6px;
   border: 1px solid #ddd;
 }
-.modal-content button{
+.modal-content #saveNote{
   background: #4da3ff;
   color: white;
   border: none;
@@ -169,5 +179,13 @@ body {
   cursor: pointer;
 }
 .icon{
+  cursor: pointer;
+}
+.modal-content #exit{
+  /* background: #4da3ff; */
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
   cursor: pointer;
 }
