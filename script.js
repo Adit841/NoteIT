@@ -3,23 +3,42 @@ const modal = document.querySelector(".modal");
 const saveBtn = document.querySelector("#saveNote");
 const notesContainer = document.querySelector(".notes");
 const exitBtn = document.querySelector("#exit");
+const themeToggle = document.querySelector("#themeToggle"); 
 
-let notes = JSON.parse(localStorage.getItem('notes')) || [];
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-exitBtn.addEventListener('click', () => {
-  modal.classList.add('hidden');
-})
-addBtn.addEventListener('click',() => {
-  modal.classList.remove('hidden');
+exitBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+addBtn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
 });
 
-function saveToLocalStorage () {
-  localStorage.setItem('notes', JSON.stringify(notes));
+if(localStorage.getItem('theme') === "dark"){
+  document.body.classList.add('dark');
+  themeToggle.textContent = "☀️";
 }
 
-function renderNote(noteData){
-  const note = document.createElement('div');
-  note.classList.add('note_card');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle("dark");
+  
+  if(document.body.classList.contains('dark')){
+    localStorage.setItem('theme', 'dark');
+    
+    themeToggle.textContent = "☀️";
+  } else {
+    localStorage.setItem("theme", "light");
+    themeToggle.textContent = "🌙";
+  }
+});
+
+function saveToLocalStorage() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+function renderNote(noteData) {
+  const note = document.createElement("div");
+  note.classList.add("note_card");
 
   note.innerHTML = `
     <div class = "top">
@@ -40,35 +59,34 @@ function renderNote(noteData){
 
   notesContainer.appendChild(note);
 
-  const deleteBtn = note.querySelector('.delete_btn');
+  const deleteBtn = note.querySelector(".delete_btn");
 
-  deleteBtn.addEventListener('click',()=>{
+  deleteBtn.addEventListener("click", () => {
     note.remove();
-    notes = notes.filter(n => n.id !== noteData.id );
+    notes = notes.filter((n) => n.id !== noteData.id);
     saveToLocalStorage();
   });
 
-  const checkbox = note.querySelector('input');
+  const checkbox = note.querySelector("input");
 
-  checkbox.addEventListener('change', () => {
-    note.classList.toggle('completed');
+  checkbox.addEventListener("change", () => {
+    note.classList.toggle("completed");
     noteData.completed = checkbox.checked;
     saveToLocalStorage();
-
   });
 
-  if(noteData.completed){
-    note.classList.add('completed');
+  if (noteData.completed) {
+    note.classList.add("completed");
   }
 }
 
 saveBtn.addEventListener("click", () => {
-  const title = document.getElementById('title').value;
-  const desc = document.getElementById('desc').value;
-  const category = document.getElementById('category').value;
+  const title = document.getElementById("title").value;
+  const desc = document.getElementById("desc").value;
+  const category = document.getElementById("category").value;
   const date = new Date().toLocaleDateString();
-  
-  if(title.trim() === "" || desc.trim()===""){
+
+  if (title.trim() === "" || desc.trim() === "") {
     alert("please fill all fields");
     return;
   }
@@ -78,17 +96,15 @@ saveBtn.addEventListener("click", () => {
     desc,
     category,
     date,
-    completed:false
+    completed: false,
   };
-  
+
   notes.push(noteData);
   saveToLocalStorage();
   renderNote(noteData);
-  modal.classList.add('hidden');
+  modal.classList.add("hidden");
 
-  document.getElementById('title').value ="";
-  document.getElementById('desc').value ="";
-
-  
+  document.getElementById("title").value = "";
+  document.getElementById("desc").value = "";
 });
 notes.forEach(renderNote);

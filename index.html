@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    
     <div class="container">
       <header>
         <nav class="navbar">
           <input type="text" placeholder="Search......" class="search" />
           <button class="addbtn">+ADD</button>
+          <button id="themeToggle">🌙</button>
         </nav>
       </header>
       <section class="filter">
@@ -27,33 +27,17 @@
           Show only completed notes
         </label>
       </section>
-      <main class="notes">
-        <div class="note_card">
-          <div class="top">
-            <span class="badge">Business</span>
-            <div class="actions">
-              <input type="checkbox">
-              <span class="icon1">✏️</span>
-               <span class="delete_btn">🗑️</span>
-            </div>
-          </div>
-            <h3>Finish the task on the board</h3>
-            <p>Remeber to finish task...</p>
-            <div class="date">22.01.2023</div>
-        </div>
-        </div>
-      </main>
+      <main class="notes"></main>
     </div>
     <div class="modal hidden">
-
       <div class="modal-content">
         <div class="modal-header">
           <h2>ADD NOTE</h2>
           <button id="exit">X</button>
         </div>
-        <input type="text" id="title" placeholder="Title">
-        <textarea  id="desc" placeholder="Description"></textarea>
-        
+        <input type="text" id="title" placeholder="Title" />
+        <textarea id="desc" placeholder="Description"></textarea>
+
         <select id="category">
           <option value="business">Business</option>
           <option value="home">Home</option>
