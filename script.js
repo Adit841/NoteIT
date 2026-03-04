@@ -4,11 +4,14 @@ const saveBtn = document.querySelector("#saveNote");
 const notesContainer = document.querySelector(".notes");
 const exitBtn = document.querySelector("#exit");
 const themeToggle = document.querySelector("#themeToggle");
-let selectedCategory = "all";
 const tabs = document.querySelectorAll(".tab span");
 const searchInput = document.querySelector(".search");
 
+let selectedCategory = "all";
+let editNotes = null;
 let searchTerm = "";
+
+
 
 searchInput.addEventListener("input", () => {
   searchTerm = searchInput.value.toLowerCase();
@@ -109,9 +112,9 @@ function renderNote(noteData) {
   const deleteBtn = note.querySelector(".delete_btn");
 
   deleteBtn.addEventListener("click", () => {
-    note.remove();
     notes = notes.filter((n) => n.id !== noteData.id);
     saveToLocalStorage();
+    renderFilteredNotes();
   });
 
   const checkbox = note.querySelector("input");
@@ -125,6 +128,17 @@ function renderNote(noteData) {
   if (noteData.completed) {
     note.classList.add("completed");
   }
+  
+const editBtn = note.querySelector(".icon");
+editBtn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+
+  document.getElementById("title").value = noteData.title;
+  document.getElementById("desc").value = noteData.desc;
+  document.getElementById("category").value = noteData.category;
+
+  editNotes = noteData.id;
+});
 }
 
 saveBtn.addEventListener("click", () => {
@@ -137,22 +151,38 @@ saveBtn.addEventListener("click", () => {
     alert("please fill all fields");
     return;
   }
-  const noteData = {
-    id: Date.now(),
-    title,
-    desc,
-    category,
-    date,
-    completed: false,
-  };
+  if(editNotes !== null){
 
-  notes.push(noteData);
+    const note = notes.find(n => n.id === editNotes);
+
+    note.title = title;
+    note.desc = desc;
+    note.category = category;
+    note.date = date;
+
+    editNotes = null;
+
+  }else{
+    const newData = {
+      id: Date.now(),
+      title,
+      desc,
+      category,
+      date,
+      completed:false
+    };
+
+    notes.push(newData);
+  }
+
   saveToLocalStorage();
-  renderNote(noteData);
-  modal.classList.add("hidden");
+  renderFilteredNotes();
 
-  document.getElementById("title").value = "";
-  document.getElementById("desc").value = "";
+  modal.classList.add('hidden');
+
+  document.getElementById('title').value = "";
+  document.getElementById('desc').value = "";
+
 });
 // notes.forEach(renderNote);
 renderFilteredNotes();
