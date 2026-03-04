@@ -3,20 +3,27 @@ const modal = document.querySelector(".modal");
 const saveBtn = document.querySelector("#saveNote");
 const notesContainer = document.querySelector(".notes");
 const exitBtn = document.querySelector("#exit");
-const themeToggle = document.querySelector("#themeToggle"); 
-let selectedCategory = 'all';
+const themeToggle = document.querySelector("#themeToggle");
+let selectedCategory = "all";
 const tabs = document.querySelectorAll(".tab span");
+const searchInput = document.querySelector(".search");
 
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
+let searchTerm = "";
 
-    tab.classList.add('active');
+searchInput.addEventListener("input", () => {
+  searchTerm = searchInput.value.toLowerCase();
+  renderFilteredNotes();
+});
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    tabs.forEach((t) => t.classList.remove("active"));
+
+    tab.classList.add("active");
     selectedCategory = tab.textContent.toLowerCase();
 
     renderFilteredNotes();
-  })
-})
+  });
+});
 
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
@@ -27,17 +34,17 @@ addBtn.addEventListener("click", () => {
   modal.classList.remove("hidden");
 });
 
-if(localStorage.getItem('theme') === "dark"){
-  document.body.classList.add('dark');
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
   themeToggle.textContent = "☀️";
 }
 
-themeToggle.addEventListener('click', () => {
+themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  
-  if(document.body.classList.contains('dark')){
-    localStorage.setItem('theme', 'dark');
-    
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+
     themeToggle.textContent = "☀️";
   } else {
     localStorage.setItem("theme", "light");
@@ -50,17 +57,30 @@ function saveToLocalStorage() {
 }
 
 function renderFilteredNotes() {
-    notesContainer.innerHTML  = "";
+  notesContainer.innerHTML = "";
 
-    let filteredNotes;
+  let filteredNotes = notes;
 
-    if(selectedCategory === "all"){
-      filteredNotes = notes;
-    }else{
-      filteredNotes = notes.filter(note => note.category === selectedCategory);
-    }
-
-    filteredNotes.forEach(renderNote);
+  
+  if (selectedCategory !== "all") {
+    filteredNotes = filteredNotes.filter(
+      (note) => note.category === selectedCategory,
+    );
+  }
+  
+  if (searchTerm !== "") {
+    filteredNotes = filteredNotes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(searchTerm) ||
+      note.desc.toLowerCase().includes(searchTerm),
+    );
+  }
+  
+  if(filteredNotes.length === 0){
+    notesContainer.innerHTML = "<p> No notes found </p>"
+    return;
+  }
+  filteredNotes.forEach(renderNote);
 }
 
 function renderNote(noteData) {
