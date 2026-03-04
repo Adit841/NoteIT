@@ -30,7 +30,9 @@ body {
   align-items: center;
   margin-bottom: 20px;
 }
-
+#themeToggle{
+  margin-right: 10px;
+}
 .search {
   width: 80%;
   padding: 10px;

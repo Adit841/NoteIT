@@ -4,6 +4,19 @@ const saveBtn = document.querySelector("#saveNote");
 const notesContainer = document.querySelector(".notes");
 const exitBtn = document.querySelector("#exit");
 const themeToggle = document.querySelector("#themeToggle"); 
+let selectedCategory = 'all';
+const tabs = document.querySelectorAll(".tab span");
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+
+    tab.classList.add('active');
+    selectedCategory = tab.textContent.toLowerCase();
+
+    renderFilteredNotes();
+  })
+})
 
 let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
@@ -34,6 +47,20 @@ themeToggle.addEventListener('click', () => {
 
 function saveToLocalStorage() {
   localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+function renderFilteredNotes() {
+    notesContainer.innerHTML  = "";
+
+    let filteredNotes;
+
+    if(selectedCategory === "all"){
+      filteredNotes = notes;
+    }else{
+      filteredNotes = notes.filter(note => note.category === selectedCategory);
+    }
+
+    filteredNotes.forEach(renderNote);
 }
 
 function renderNote(noteData) {
@@ -107,4 +134,5 @@ saveBtn.addEventListener("click", () => {
   document.getElementById("title").value = "";
   document.getElementById("desc").value = "";
 });
-notes.forEach(renderNote);
+// notes.forEach(renderNote);
+renderFilteredNotes();
